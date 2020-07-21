@@ -1,0 +1,102 @@
+﻿<div ng-controller="photon.hotspot.edit.controller as vm">
+
+	<umb-editor-view>
+
+		<div class="umb-editor-header">
+			<div class="flex items-center" style="height: 100%;">
+				<div class="flex items-center" style="flex: 1;">
+					<div id="nameField" class="umb-editor-header__name-and-description" style="flex: 1 1 auto;">
+						<localize key="photon_headerText">Hotspot</localize>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<umb-editor-container>
+			<umb-box>
+
+				<umb-box-content>
+					<div class="umb-property">
+						<div class="control-group umb-control-group">
+							<div class="umb-el-wrap">
+								<label class="control-label" for="title" title="title">
+									Title
+								</label>
+								<div class="controls">
+									<div class="umb-property-editor">
+										<input type="text" name="title" id="title" class="umb-property-editor umb-textstring textstring" ng-model="model.title">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="umb-property">
+						<div class="control-group umb-control-group">
+							<div class="umb-el-wrap">
+								<label class="control-label" for="summary" title="Summary">
+									Summary
+								</label>
+								<div class="controls">
+									<div class="umb-property-editor">
+										<textarea name="summary" rows="10" id="summary" class="umb-property-editor umb-textarea textstring" ng-model="model.summary"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="umb-property">
+						<div class="control-group umb-control-group">
+							<div class="umb-el-wrap">
+								<label class="control-label">
+									Link
+								</label>
+								<div class="controls">
+									<div class="umb-property-editor">
+										<umb-node-preview ng-if="model.link"
+																			icon="model.link.icon"
+																			name="model.link.name"
+																			allow-edit="true"
+																			allow-remove="true"
+																			on-edit="vm.linkEdit()"
+																			on-remove="model.link = null">
+										</umb-node-preview>
+										<a href=""
+											 ng-show="!model.link"
+											 class="umb-node-preview-add"
+											 ng-click="vm.linkEdit()"
+											 prevent-default>
+											<localize key="general_add">Add</localize>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</umb-box-content>
+
+			</umb-box>		
+		
+		</umb-editor-container>
+
+		<umb-editor-footer>
+			<umb-editor-footer-content-right>
+				<umb-button type="button"
+				            button-style="link"
+				            label-key="general_close"
+				            shortcut="esc"
+				            action="vm.close()">
+				</umb-button>
+				<umb-button type="button"
+				            button-style="action"
+				            label-key="buttons_save"
+				            action="vm.submit(model)">
+				</umb-button>
+			</umb-editor-footer-content-right>
+		</umb-editor-footer>
+
+	</umb-editor-view>
+
+</div>
