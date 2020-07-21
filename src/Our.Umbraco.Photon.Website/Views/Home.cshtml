@@ -1,0 +1,88 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Umbraco Photon</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/demo.css" />
+</head>
+<body>
+	<main role="main" class="mt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1 class="mb-5">Umbraco Photon</h1>
+				</div>
+				<div class="col-12">
+					<div class="photon" style="width: @($"{Model.PhotonImage.Image.Value<int>("umbracoWidth")}px"): height: @($"{Model.PhotonImage.Image.Value<int>("umbracoHeight")}px")">
+						<img src="@Model.PhotonImage.Image.Url" alt="Map" class="photon__image">
+						@foreach (var tag in Model.PhotonImage.Tags)
+						{
+							<div class="photon__pin" style="@($"top: {tag.Y}%; left: {tag.X}%;")">
+								<a href="#" role="button"
+									 title="@tag.Title"
+									 data-toggle="popover"
+									 data-trigger="focus"
+								   data-content="@($"{tag.Summary}{(!string.IsNullOrWhiteSpace(tag.Link?.Url) ? $"<br /><br /><a class='btn btn-primary' target='{tag.Link.Target}' href='{tag.Link.Url}'>{tag.Link.Name}</a>" : string.Empty)}")">
+									<svg viewBox="-2 -2 40 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										<title>Pin</title>
+										<g transform="translate(-219.000000, -282.000000)" class="photon__pin-fill">
+											<path d="M237,333.443489 C225,317.775247 219,306.627417 219,300 C219,290.058875 227.058875,282 237,282 C246.941125,282 255,290.058875 255,300 C255,306.627417 249,317.775247 237,333.443489 Z M237,307 C240.865993,307 244,303.865993 244,300 C244,296.134007 240.865993,293 237,293 C233.134007,293 230,296.134007 230,300 C230,303.865993 233.134007,307 237,307 Z"></path>
+										</g>
+									</svg>
+								</a>
+							</div>
+
+							@*<div class="photon__pin @(tag.X > 50 ? "map-pin-right" : string.Empty)">
+									<div class="map-pin-content box-shadow" style="@($"top: {tag.Y}%; left: {tag.X}%;")" data-index="true">
+										<h2>@tag.Title</h2>
+										<p>@tag.Summary</p>
+										@if (!string.IsNullOrWhiteSpace(tag.Link?.Url))
+										{
+											<div class="btn-block">
+												<a class="btn btn-primary" target="@tag.Link.Target" rel="noreferrer" href="@tag.Link.Url">@tag.Link.Name</a>
+											</div>
+										}
+									</div>
+								</div>*@
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Modal body text goes here.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="//code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+			$('[data-toggle="popover"]').popover({ html: true });
+		})
+	</script>
+</body>
+</html>

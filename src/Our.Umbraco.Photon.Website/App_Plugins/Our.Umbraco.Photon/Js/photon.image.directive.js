@@ -113,7 +113,7 @@
 
 			$scope.editTag = function(tag) {
 				var options = {
-					view: '/App_Plugins/Photon/Views/photon.hotspot.edit.html',
+					view: '/App_Plugins/Our.Umbraco.Photon/Views/photon.hotspot.edit.html',
 					size: 'small',
 					tag: tag,
 					submit: function (model) {

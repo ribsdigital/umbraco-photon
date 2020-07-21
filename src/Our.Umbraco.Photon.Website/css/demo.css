@@ -1,0 +1,15 @@
+﻿.photon {
+  position: absolute; }
+  .photon__image {
+    margin-bottom: 10px; }
+  .photon__pin {
+    position: absolute;
+    width: 38px;
+    height: 55px; }
+    .photon__pin-fill {
+      fill: #3544b1; }
+    .photon__pin svg {
+      max-width: 100%;
+      max-height: 100%; }
+    .photon__pin:hover {
+      cursor: pointer; }
