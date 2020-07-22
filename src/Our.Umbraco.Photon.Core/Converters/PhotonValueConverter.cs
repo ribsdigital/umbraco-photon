@@ -4,11 +4,19 @@ using Our.Umbraco.Photon.Core.Models;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
+using Umbraco.Web.PublishedCache;
 
 namespace Our.Umbraco.Photon.Core.Converters
 {
 	public class PhotonValueConverter : IPropertyValueConverter
 	{
+		private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
+
+		public PhotonValueConverter(IPublishedSnapshotAccessor publishedSnapshotAccessor)
+		{
+			_publishedSnapshotAccessor = publishedSnapshotAccessor;
+		}
+
 		public bool IsConverter(IPublishedPropertyType propertyType)
 		{
 			return Constants.DataEditorAlias.Equals(propertyType.EditorAlias);
@@ -43,9 +51,7 @@ namespace Our.Umbraco.Photon.Core.Converters
 				return value;
 			}
 
-			//todo: pretty sure we're not sposed to use the umbraco helper here?
-			var umbracoHelper = global::Umbraco.Web.Composing.Current.UmbracoHelper;
-			value.Image = umbracoHelper.Media(value.ImageId);
+			value.Image = _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(value.ImageId);
 
 			return value;
 		}
